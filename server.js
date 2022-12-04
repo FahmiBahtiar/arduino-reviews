@@ -1,14 +1,22 @@
+
 const express = require("express");
 const route = express()
 const port = 3000
 const path = require("path");
-
+const cors = require("cors");
 const bodyParser = require("body-parser");
 const connectDatabase = require("./backend/utils/mongodb")
 
-
+route.use(express.json());
 route.use(bodyParser.json());
 connectDatabase();
+
+const corsOptions = {
+  origin: true, //included origin as true
+  credentials: true, //included credentials as true
+};
+
+route.use(cors(corsOptions));
 
 route.use(
     express.urlencoded({ extended: true })

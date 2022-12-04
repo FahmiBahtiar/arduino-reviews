@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const ReviewSchema = new mongoose.Schema({
     puas: {
-        type:Number,
+        type: Number,
         required: [true, "Customer name is required"],
         default: 0,
     },

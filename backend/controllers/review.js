@@ -2,8 +2,10 @@
 // // const Market = mongoose.model("Market");
 // const Review = mongoose.model("Review");
 const Review = require("../models/review");
-// const now = new Date().toJSON().slice(0, 10).replace(/-/g, '-');
-const now = "2022-12-02"
+const cors = require("cors");   
+
+const now = new Date().toJSON().slice(0, 10).replace(/-/g, '-');
+// const now = "2022-12-03" 
 
 exports.createReview = (async (req, res, next) => {
     const review = await Review.findOne({
@@ -20,11 +22,11 @@ exports.createReview = (async (req, res, next) => {
         });
     } else {
         await Review.updateOne({ reportDate: now }, {
-            $inc: {
+            // $inc: {
                 puas: req.body.puas,
                 biasa: req.body.biasa,
                 tidakPuas: req.body.tidakPuas
-            }
+            // }
         });
 
     }
@@ -35,7 +37,7 @@ exports.createReview = (async (req, res, next) => {
     });
 
 })
-exports.getReviewNow= (async (req, res, next) => {
+exports.getReviewNow=  (cors(), async (req, res, next) => {
     const reviews = await Review.find({reportDate:now});
     res.status(200).json({
         success: true, reviews
