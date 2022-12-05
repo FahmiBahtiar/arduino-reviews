@@ -1,7 +1,7 @@
 const api_url =
-  "https://arduino-reviews.fahmibahtiar.repl.co/api/v1/review";
+  "https://3000-fahmibahtia-arduinorevi-ep2bm3kfyxh.ws-us77.gitpod.io/api/v1/review";
 const url_api =
-  "https://arduino-reviews.fahmibahtiar.repl.co/api/v1/review/now";
+  "https://3000-fahmibahtia-arduinorevi-ep2bm3kfyxh.ws-us77.gitpod.io/api/v1/review/now";
 
 getapi(api_url);
 getapi1(url_api);
@@ -20,22 +20,22 @@ async function getapi(url) {
 
       `<tr>
               <th>Report Date</th>
-              <th>Puas</th>
-              <th>Tidak Puas</th>
-              <th>Biasa</th>
+              <th>Noice</th>
+              <th>Meh</th>
+              <th>Sadge</th>
              </tr>`;
     // Loop to access all rows 
     for (let r of data.reviews) {
       tab += `<tr> 
         <td>${r.reportDate} </td>
         <td>${r.puas} </td>
-        <td>${r.tidakPuas}</td>
-        <td>${r.biasa}</td> 
+        <td>${r.biasa}</td>
+        <td>${r.tidakPuas}</td> 
     </tr>`;
     }
     setInterval(function() {
       location.reload()
-    }, 5000)
+    }, 10000)
 
 
     // Setting innerHTML as tab variable
@@ -56,19 +56,17 @@ async function getapi1(url) {
 
     let tab =
       `<tr>
-              <th>Report Date</th>
-              <th>Puas</th>
-              <th>Tidak Puas</th>
-              <th>Biasa</th>
+              <th>Noice</th>
+              <th>Meh</th>
+              <th>Sadge</th>
              </tr>`;
 
     // Loop to access all rows 
     for (let r of data.reviews) {
       tab += `<tr> 
-        <td>${r.reportDate} </td>
         <td>${r.puas} </td>
-        <td>${r.tidakPuas}</td>
-        <td>${r.biasa}</td> 
+        <td>${r.biasa}</td>
+        <td>${r.tidakPuas}</td> 
     </tr>`;
     }
     setInterval(function() {

@@ -1,0 +1,79 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Nunito';
+}
+.navbar{
+    background-color: black;
+    width: 100px;
+    height: 100px;
+    /* text-align: center; */
+    /* justify-items: center; */
+}
+.navbar a{
+    text-decoration: none;
+    left: 20%;
+    /* text-align: center; */
+    position: relative;
+    color: white;
+    /* background-color: aliceblue; */
+}
+.navbar a:active{
+    color: white;
+}
+.navbar a:hover{
+    color: white;
+}
+.icon{
+    display: flex;
+    /* position: -ms-page; */
+    justify-content: center;
+    /* padding: 50%; */
+    text-align: center;
+    margin-top: 5%;
+
+}
+.icon1{
+    position: relative;
+    right: 29%;
+    /* float: left; */
+}
+.icon2{
+    /* left: 36%; */
+    right: 1.5%;
+    position: relative;
+    /* float: left */
+}
+.icon3{
+    left: 28%;
+    position: relative;
+    float: left;
+}
+#now{
+    margin-bottom: 5%;
+    margin-top: 5%;
+}
+#now th{
+    text-align: center;
+    border: none;
+    font-size: 30px;
+    
+}
+#now td{
+    text-align: center;
+    border: none;
+    font-size: 60px;
+    font-weight: bolder;
+    
+    
+}
+#employees th{
+    background-color: black;
+    color: white;
+    text-align: center;
+    font-size: 30px;
+}
+#employees td{
+    text-align: center;
+    font-size: 30px;
+}

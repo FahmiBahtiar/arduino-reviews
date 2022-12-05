@@ -5,8 +5,9 @@ const Review = require("../models/review");
 // const cors = require("cors");
 
 // const now = new Date().toJSON().slice(0, 10).replace(/-/g, '-');
-// const now = "2022-12-04"
-const now = new Date().toJSON().slice(0, 10).replace(/-/g, '-').toLocaleString('en-US', { timeZone: 'Asia/Jakarta' });
+// const now = "2022-12-03"
+const now = new Date().toJSON().slice(0, 10).replace(/-/g, '-').toLocaleString('id', { timeZone: 'Asia/Jakarta' });
+
 
 // console.log(now)
 
@@ -48,9 +49,12 @@ exports.getReviewNow = (async (req, res, next) => {
 });
 
 exports.getAllReview = (async (req, res, next) => {
+
+
   // res.header("Access-Control-Allow-Origin", '*'); // Update to match the domain you will make the request from
   // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  const reviews = await Review.find();
+  const reviews = await Review.find().sort({"createdAt": -1});
+
   res.status(200).json({
     success: true, reviews
   });
