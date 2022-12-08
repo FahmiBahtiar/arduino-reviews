@@ -5,7 +5,7 @@ const Review = require("../models/review");
 // const cors = require("cors");
 
 // const now = new Date().toJSON().slice(0, 10).replace(/-/g, '-');
-// const now = "2022-12-03"
+// const now = "2022-12-06"
 const now = new Date().toJSON().slice(0, 10).replace(/-/g, '-').toLocaleString('id', { timeZone: 'Asia/Jakarta' });
 
 
@@ -42,10 +42,10 @@ exports.createReview = (async (req, res, next) => {
 
 })
 exports.getReviewNow = (async (req, res, next) => {
-  const reviews = await Review.find({ reportDate: now });
-  res.status(200).json({
-    success: true, reviews
-  });
+  const reviews = await Review.findOne({ reportDate: now });
+  res.status(200).json(
+    reviews
+  );
 });
 
 exports.getAllReview = (async (req, res, next) => {
@@ -53,15 +53,20 @@ exports.getAllReview = (async (req, res, next) => {
 
   // res.header("Access-Control-Allow-Origin", '*'); // Update to match the domain you will make the request from
   // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  const reviews = await Review.find().sort({"createdAt": -1});
+  if (req.query.reportDate == "" || req.query.reportDate == null || req.query.reportDate == undefined) {
+    let reviews = await Review.find().sort({ "reportDate": -1 });
 
-  res.status(200).json({
-    success: true, reviews
-  });
+    res.status(200).json(reviews);
+  } else {
+
+    const reviews = await Review.findOne({ reportDate: req.query.reportDate });
+    res.status(200).json(
+       reviews
+    );
+  }
+  
 
 });
-
-
 
 
 

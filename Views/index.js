@@ -1,7 +1,8 @@
 const api_url =
-  "https://3000-fahmibahtia-arduinorevi-ep2bm3kfyxh.ws-us77.gitpod.io/api/v1/review";
+  "http://localhost:3000/api/v1/review";
 const url_api =
-  "https://3000-fahmibahtia-arduinorevi-ep2bm3kfyxh.ws-us77.gitpod.io/api/v1/review/now";
+  "http://localhost:3000/api/v1/review/now";
+
 
 getapi(api_url);
 getapi1(url_api);
@@ -13,7 +14,7 @@ async function getapi(url) {
 
   // Storing data in form of JSON
   var data = await response.json();
-  console.log(data);
+  // console.log(data);
   show(data);
   function show(data) {
     let tab =
@@ -25,7 +26,7 @@ async function getapi(url) {
               <th>Sadge</th>
              </tr>`;
     // Loop to access all rows 
-    for (let r of data.reviews) {
+    for (let r of data) {
       tab += `<tr> 
         <td>${r.reportDate} </td>
         <td>${r.puas} </td>
@@ -33,9 +34,9 @@ async function getapi(url) {
         <td>${r.tidakPuas}</td> 
     </tr>`;
     }
-    setInterval(function() {
-      location.reload()
-    }, 10000)
+    // setInterval(function() {
+    //   location.reload()
+    // }, 10000)
 
 
     // Setting innerHTML as tab variable
@@ -62,16 +63,16 @@ async function getapi1(url) {
              </tr>`;
 
     // Loop to access all rows 
-    for (let r of data.reviews) {
+   
       tab += `<tr> 
-        <td>${r.puas} </td>
-        <td>${r.biasa}</td>
-        <td>${r.tidakPuas}</td> 
+        <td>${data.puas} </td>
+        <td>${data.biasa}</td>
+        <td>${data.tidakPuas}</td> 
     </tr>`;
-    }
-    setInterval(function() {
-      location.reload()
-    }, 10000)
+    
+    // setInterval(function() {
+    //   location.reload()
+    // }, 10000)
 
 
     // Setting innerHTML as tab variable

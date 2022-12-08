@@ -22,7 +22,7 @@
     color: white;
 }
 .navbar a:hover{
-    color: white;
+    color: aliceblue;
 }
 .icon{
     display: flex;
@@ -50,7 +50,7 @@
     float: left;
 }
 #now{
-    margin-bottom: 5%;
+    margin-bottom: 10%;
     margin-top: 5%;
 }
 #now th{
@@ -76,4 +76,34 @@
 #employees td{
     text-align: center;
     font-size: 30px;
+}
+
+/* about */
+
+.about{
+    width: 800px;
+    height: auto;
+    border-radius: 5px;
+    margin: auto;
+    background-color: black;
+    position: relative;
+    top: 150px;
+    align-items: center;
+    box-shadow: 0px 0px 30px black;
+    color: white;
+    text-align: center;
+    padding: 60px;
+}
+.fa-github{
+    margin-right: 10px;
+    color: white;
+}
+.fa-github a:after{
+    color: white;
+}
+.fa-github a:visited{
+    color: white;
+}
+.fa-github a:hover{
+    color: white;
 }
