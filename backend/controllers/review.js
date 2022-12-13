@@ -6,7 +6,8 @@ const Review = require("../models/review");
 
 // const now = new Date().toJSON().slice(0, 10).replace(/-/g, '-');
 // const now = "2022-12-06"
-const now = new Date().toJSON().slice(0, 10).replace(/-/g, '-').toLocaleString('id', { timeZone: 'Asia/Jakarta' });
+var date = new Date();
+const now = new Date(date.getTime() - (date.getTimezoneOffset() * 60000 )).toJSON().slice(0, 10).replace(/-/g, '-');
 
 
 // console.log(now)
@@ -49,22 +50,35 @@ exports.getReviewNow = (async (req, res, next) => {
 });
 
 exports.getAllReview = (async (req, res, next) => {
+  var startDate = req.query.startDate
+  var endDate = req.query.endDate
 
 
   // res.header("Access-Control-Allow-Origin", '*'); // Update to match the domain you will make the request from
   // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  if (req.query.reportDate == "" || req.query.reportDate == null || req.query.reportDate == undefined) {
+  if ((startDate == "" || startDate == null || startDate == undefined) && (endDate == "" || endDate == null || endDate == undefined)) {
     let reviews = await Review.find().sort({ "reportDate": -1 });
 
     res.status(200).json(reviews);
   } else {
+//2022-12-07
 
-    const reviews = await Review.findOne({ reportDate: req.query.reportDate });
+    const reviews = await Review.find({
+      "reportDate": -1,
+      reportDate: {
+        
+        $gte:startDate,
+        $lte: endDate
+        // $gte: new Date(Number(a[0]),Number(a[1]) , Number(a[2])),
+        // $lt: new Date(Number(b[0]), Number(b[1]), Number(b[2]))
+      
+      }
+    });
     res.status(200).json(
-       reviews
+      reviews
     );
   }
-  
+
 
 });
 

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <script src="index.js"></script>
+    <!-- <script src="index.js"></script> -->
     <link rel="stylesheet" href="style.css" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -30,8 +30,11 @@
         <div class="icon3"><i class="fa-regular fa-face-frown fa-10x"></i></div>
 
     </div> -->
-    <label for="report">Choose a car:</label>
-    <select id="report">
+    <label for="startDate">Choose Start Date</label>
+    <select id="startDate">
+    </select>
+    <label for="endDate">Choose End Date</label>
+    <select id="endDate">
     </select>
     <button type="button" onclick="reportDate()">Click Me!</button>
 
@@ -54,7 +57,90 @@
         </table>
     </table>
     <script>
-        var report = document.getElementById('report')
+        const api_url =
+            "http://localhost:3000/api/v1/review";
+        const url_api =
+            "http://localhost:3000/api/v1/review/now";
+
+
+        getapi(api_url);
+        getapi1(url_api);
+        // Defining async function
+        async function getapi(url) {
+
+            // Storing response
+            const response = await fetch(url);
+
+            // Storing data in form of JSON
+            var data = await response.json();
+            // console.log(data);
+            show(data);
+            function show(data) {
+                let tab =
+
+                    `<tr>
+              <th>Report Date</th>
+              <th>Noice</th>
+              <th>Meh</th>
+              <th>Sadge</th>
+             </tr>`;
+                // Loop to access all rows 
+                for (let r of data) {
+                    tab += `<tr> 
+        <td>${r.reportDate} </td>
+        <td>${r.puas} </td>
+        <td>${r.biasa}</td>
+        <td>${r.tidakPuas}</td> 
+        </tr>`;
+                }
+                // setInterval(function() {
+                //   location.reload()
+                // }, 10000)
+
+
+                // Setting innerHTML as tab variable
+                document.getElementById("employees").innerHTML = tab;
+            }
+        }
+
+        async function getapi1(url) {
+
+            // Storing response
+            const response = await fetch(url);
+
+            // Storing data in form of JSON
+            var data = await response.json();
+            console.log(data);
+            show(data);
+            function show(data) {
+
+                let tab =
+                    `<tr>
+              <th>Noice</th>
+              <th>Meh</th>
+              <th>Sadge</th>
+             </tr>`;
+
+                // Loop to access all rows 
+
+                tab += `<tr> 
+        <td>${data.puas} </td>
+        <td>${data.biasa}</td>
+        <td>${data.tidakPuas}</td> 
+    </tr>`;
+
+                // setInterval(function() {
+                //   location.reload()
+                // }, 10000)
+
+
+                // Setting innerHTML as tab variable
+                document.getElementById("now").innerHTML = tab;
+            }
+        }
+        var startDate = document.getElementById('startDate')
+        var endDate = document.getElementById('endDate')
+
         fetch('http://localhost:3000/api/v1/review')
             .then((response) => response.json())
             .then((data) => {
@@ -62,31 +148,18 @@
                     var opt = document.createElement("option")
                     opt.value = element.reportDate
                     opt.innerHTML = element.reportDate
-                    report.appendChild(opt)
+                    startDate.appendChild(opt)
+                    var opt2 = document.createElement("option")
+                    opt2.value = element.reportDate
+                    opt2.innerHTML = element.reportDate
+                    endDate.appendChild(opt2)
                 });
 
             });
 
         function reportDate(e) {
-            // e.preventDefault()
-            // console.log(report.value)
-            fetch(`http://localhost:3000/api/v1/review?reportDate=${report.value}`)
-                .then((response) => response.json())
-                .then((data) => {
-                    let tab =
-                        `<tr>
-                        <th>Noice</th>
-                        <th>Meh</th>
-                        <th>Sadge</th>
-                         </tr>`;
-                    tab += `<tr> 
-                    <td>${data.puas} </td>
-                    <td>${data.biasa}</td>
-                    <td>${data.tidakPuas}</td> 
-                    </tr>`;
+            getapi(`http://localhost:3000/api/v1/review?startDate=${startDate.value}&endDate=${endDate.value}`)
 
-                    document.getElementById("now").innerHTML = tab;
-                });
         }
     </script>
 
